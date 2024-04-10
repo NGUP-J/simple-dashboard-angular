@@ -1,0 +1,188 @@
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Add user
+</button>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add User</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <!-- <label for="recipient-name" class="col-form-label">Recipient:</label> -->
+            <input
+              type="text"
+              readonly
+              class="form-control"
+              id="Id"
+              name="Id"
+              [(ngModel)]="model.Id"
+              placeholder="USER ID *"
+            />
+          </div>
+          <div class="row">
+            <div class="mb-3 col">
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                name="firstName"
+                [(ngModel)]="model.firstName"
+                placeholder="First Name *"
+              />
+            </div>
+            <div class="mb-3 col">
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                name="lastName"
+                [(ngModel)]="model.lastName"
+                placeholder="Last Name *"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col">
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+                [(ngModel)]="model.email"
+                placeholder="EMAIL ID *"
+              />
+            </div>
+            <div class="mb-3 col">
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                name="phone"
+                [(ngModel)]="model.phone"
+                placeholder="Moblie NO"
+              />
+            </div>
+            <div class="mb-3 col">
+              <input
+                type="text"
+                class="form-control"
+                id="roleId"
+                name="roleId"
+                [(ngModel)]="model.roleId"
+                placeholder="Select Role Type"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col">
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                [(ngModel)]="model.username"
+                placeholder="Username *"
+              />
+            </div>
+            <div class="mb-3 col">
+              <input
+                type="text"
+                class="form-control"
+                id="password"
+                name="password"
+                [(ngModel)]="model.password"
+                placeholder="Password*"
+              />
+            </div>
+            <div class="mb-3 col">
+              <input
+                type="text"
+                class="form-control"
+                id="ComfrimPassword"
+                name="ComfrimPassword"
+                placeholder="Comfrim Password*"
+              />
+            </div>
+          </div>
+        </div>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Module Permission</th>
+              <th>Read</th>
+              <th>Write</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let permission of model.permissions; let i = index">
+              <td>{{ permission.permissionId }}</td>
+              <td>
+                <input
+                  type="checkbox"
+                  [id]="'Read' + i"
+                  name="Read{{ i }}"
+                  [ngModel]="permission.isReadable"
+                  (ngModelChange)="permission.isReadable = $event"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  [id]="'Write' + i"
+                  name="Write{{ i }}"
+                  [ngModel]="permission.isWritable"
+                  (ngModelChange)="permission.isWritable = $event"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </td>
+              <td>
+                <input
+                  type="checkbox"
+                  [id]="'Delete' + i"
+                  name="Delete{{ i }}"
+                  [ngModel]="permission.isDeletable"
+                  (ngModelChange)="permission.isDeletable = $event"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Add user
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
