@@ -1,7 +1,17 @@
 <div class="container">
   <h1 class="mt-3">User Dashboad</h1>
 
-  <div class="d-flex justify-content-end mt-3">
+  <div class="d-flex justify-content-between mt-3">
+    <div class="d-flex">
+      <input type="text" class="form-control" #queryText>
+      <button type="button" class="btn btn-warning ms-3" (click)="onSearch(queryText.value)">Search</button>
+    </div>
+    <div class="d-flex ">
+      <a (click)="sort('Name','asc')">Asc</a>
+      <a (click)="sort('Name','desc')">DESC</a>
+    </div>
+
+
     <app-add-user></app-add-user>
   </div>
 
@@ -21,8 +31,8 @@
           <td>{{ user.createdDate }}</td>
           <td>{{ user.role.roleName }}</td>
           <td>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-danger">Delete</button>
+            <app-edit-user [id]="user.userId"></app-edit-user>
+            <button class="btn btn-danger" (click)="onDelete(user.userId)">Delete</button>
           </td>
         </tr>
       </tbody>

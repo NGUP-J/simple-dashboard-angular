@@ -5,7 +5,7 @@ import { UserService } from '../services/user.service';
 import { response } from 'express';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { User } from '../models/user.model';
+import { AllUser } from '../models/all-user.model';
 
 @Component({
   selector: 'app-add-user',
@@ -15,8 +15,7 @@ import { User } from '../models/user.model';
 export class AddUserComponent implements OnDestroy{
   model: AddUserRequest;
   private addUserSubscription?: Subscription;
-  private userAddedSubscription: Subscription | undefined;
-  users$?: Observable<User>;
+  users$?: Observable<AllUser>;
 
   constructor(private userService: UserService, private router: Router) {
     this.model = {

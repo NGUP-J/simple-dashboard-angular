@@ -8,13 +8,15 @@ import { UserListComponent } from './features/dashboard/user-list/user-list.comp
 import { AddUserComponent } from './features/dashboard/add-user/add-user.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EditUserComponent } from './features/dashboard/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     UserListComponent,
-    AddUserComponent
+    AddUserComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

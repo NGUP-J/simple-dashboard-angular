@@ -1,27 +1,30 @@
 export interface User {
-    dataSource: DataSource[]
-    page: number
-    pageSize: number
-    totalCount: number
-}
-
-export interface DataSource {
-    userId: string
+    status: Status
+    data: Data
+  }
+  
+  export interface Status {
+    code: string
+    description: string
+  }
+  
+  export interface Data {
+    id: string
     firstName: string
     lastName: string
     email: string
+    phone: string
     role: Role
     username: string
     permissions: Permission[]
-    createdDate: string
-}
+  }
   
-export interface Role {
+  export interface Role {
     roleId: string
     roleName: string
-}
+  }
   
-export interface Permission {
+  export interface Permission {
     permissionId: string
     permissionName: string
-}
+  }
