@@ -10,12 +10,14 @@ import { AllUser } from '../models/all-user.model';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
-  styleUrl: './add-user.component.css'
+  styleUrl: './add-user.component.css',
 })
-export class AddUserComponent implements OnDestroy{
+export class AddUserComponent implements OnDestroy {
   model: AddUserRequest;
   private addUserSubscription?: Subscription;
   users$?: Observable<AllUser>;
+  selectRole?: string;
+  availableOptions: [{ id: '1'; name: 'Lorem Ipsum' }] | undefined;
 
   constructor(private userService: UserService, private router: Router) {
     this.model = {
@@ -32,39 +34,39 @@ export class AddUserComponent implements OnDestroy{
           permissionId: '1',
           isReadable: false,
           isWritable: false,
-          isDeletable: false
+          isDeletable: false,
         },
         {
           permissionId: '2',
           isReadable: false,
           isWritable: false,
-          isDeletable: false
+          isDeletable: false,
         },
         {
           permissionId: '3',
           isReadable: false,
           isWritable: false,
-          isDeletable: false
-        }
-      ]
+          isDeletable: false,
+        },
+      ],
     };
   }
-  
+
   ngOnInit(): void {
     this.setUserList();
   }
 
-
   onFormSubmit() {
-    this.addUserSubscription = this.userService.addUser(this.model)
-    .subscribe({
+    this.model.roleId = this.selectRole?.toString() || '1'.toString();
+    console.log(this.model);
+    this.addUserSubscription = this.userService.addUser(this.model).subscribe({
       next: (response) => {
-        console.log('User added successfully')
-        this.router.navigate(['/dashboard']);
-      }
+        console.log('User added successfully');
+        this.router.navigate(['/']);
+      },
     });
     this.resetForm();
-  } 
+  }
 
   ngOnDestroy(): void {
     this.addUserSubscription?.unsubscribe();
@@ -89,22 +91,21 @@ export class AddUserComponent implements OnDestroy{
           permissionId: '1',
           isReadable: false,
           isWritable: false,
-          isDeletable: false
+          isDeletable: false,
         },
         {
           permissionId: '2',
           isReadable: false,
           isWritable: false,
-          isDeletable: false
+          isDeletable: false,
         },
         {
           permissionId: '3',
           isReadable: false,
           isWritable: false,
-          isDeletable: false
-        }
-      ]
+          isDeletable: false,
+        },
+      ],
     };
   }
-
 }

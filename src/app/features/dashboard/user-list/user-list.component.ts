@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { AllUser } from '../models/all-user.model';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -7,17 +7,47 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css'
+  styleUrl: './user-list.component.css',
 })
-export class UserListComponent implements OnInit{
+export class UserListComponent implements OnInit, OnDestroy {
   users$?: Observable<AllUser>;
-  constructor(private userService: UserService,private router: Router) {}
- 
+
+  countUserSubscription?: Subscription;
+
+  totalCount = 0;
+  list: number[] = [];
+  pageNumber = 1;
+  pageSize = 5;
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.GetAll();
+    this.countUserSubscription = this.userService.getUserCount().subscribe({
+      next: (value) => {
+        this.totalCount = value;
+        this.list = new Array(Math.ceil(value / this.pageSize));
+        this.GetAll(
+          undefined,
+          undefined,
+          undefined,
+          this.pageNumber,
+          this.pageSize
+        );
+      },
+    });
+
     this.userService.Refreshrequired.subscribe(() => {
-      this.GetAll();
+      this.userService.getUserCount().subscribe({
+        next: (value) => {
+          this.totalCount = value;
+          this.GetAll(
+            undefined,
+            undefined,
+            undefined,
+            this.pageNumber,
+            this.pageSize
+          );
+        },
+      });
     });
   }
 
@@ -25,19 +55,111 @@ export class UserListComponent implements OnInit{
     this.userService.deleteUser(id).subscribe({
       next: (response) => {
         this.router.navigate(['/dashboard']);
-      }
+      },
     });
-  } 
+  }
 
   onSearch(search?: string): void {
-    this.GetAll(search);
+    this.countUserSubscription = this.userService.getUserCount().subscribe({
+      next: (value) => {
+        this.totalCount = value;
+        this.list = new Array(Math.ceil(value / this.pageSize));
+        this.GetAll(
+          search,
+          undefined,
+          undefined,
+          this.pageNumber,
+          this.pageSize
+        );
+      },
+    });
+
+
   }
 
   sort(orderBy: string, orderDirection: string): void {
-    this.users$ = this.userService.getAllUsers(undefined, orderBy, orderDirection);
+    this.users$ = this.userService.getAllUsers(
+      undefined,
+      orderBy,
+      orderDirection,
+      this.pageNumber,
+      this.pageSize
+    );
   }
 
-  GetAll(search?: string) {
-    this.users$ = this.userService.getAllUsers(search);
+  getPage(pageNumber: number): void {
+    this.pageNumber = pageNumber;
+    this.GetAll(
+      undefined,
+      undefined,
+      undefined,
+      this.pageNumber,
+      this.pageSize
+    );
+  }
+
+  getPrevPage(): void {
+    if (this.pageNumber - 1 < 1) return;
+
+    this.pageNumber -= 1;
+    this.GetAll(
+      undefined,
+      undefined,
+      undefined,
+      this.pageNumber,
+      this.pageSize
+    );
+  }
+
+  getNextPage(): void {
+    if (this.pageNumber + 1 > this.list.length) return;
+
+    this.pageNumber += 1;
+    this.GetAll(
+      undefined,
+      undefined,
+      undefined,
+      this.pageNumber,
+      this.pageSize
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.userService.Refreshrequired.unsubscribe();
+  }
+
+  onPageSizeChange(): void {
+    console.log(this.pageSize);
+    this.pageNumber = 1; // Reset pageNumber when pageSize changes
+    this.countUserSubscription = this.userService.getUserCount().subscribe({
+      next: (value) => {
+        this.totalCount = value;
+        this.list = new Array(Math.ceil(value / this.pageSize));
+        this.GetAll(
+          undefined,
+          undefined,
+          undefined,
+          this.pageNumber,
+          this.pageSize
+        );
+      },
+    });
+  }
+
+  GetAll(
+    search?: string,
+    orderBy?: string,
+    orderDirection?: string,
+    pageNumber?: number,
+    pageSize?: number
+  ): void {
+    console.log(search, orderBy, orderDirection, pageNumber, pageSize);
+    this.users$ = this.userService.getAllUsers(
+      search,
+      orderBy,
+      orderDirection,
+      pageNumber,
+      pageSize
+    );
   }
 }

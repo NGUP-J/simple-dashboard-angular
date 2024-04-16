@@ -1,11 +1,13 @@
-<button
+<!-- <button
   type="button"
   class="btn btn-primary"
   data-bs-toggle="modal"
   [attr.data-bs-target]="'#editModal' + id"
 >
   Edit
-</button>
+</button> -->
+<i class="bi bi-pencil" data-bs-toggle="modal"
+[attr.data-bs-target]="'#editModal' + id"></i>
 
 <div
   class="modal fade"
@@ -17,7 +19,7 @@
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editModalLabel">Edit User</h1>
+        <h1 class="modal-title fs-5" id="editModalLabel{{ id}}">Edit User</h1>
         <button
           type="button"
           class="btn-close"
@@ -32,7 +34,7 @@
               type="text"
               disabled
               class="form-control"
-              id="Id"
+              id="Id{{ id}}"
               name="Id"
               value="{{ user?.data?.id }}"
               placeholder="USER ID *"
@@ -43,9 +45,8 @@
               <input
                 type="text"
                 class="form-control"
-                id="firstName"
+                id="firstName {{ id }}"
                 name="firstName"
-                value="{{ user?.data?.firstName }}"
                 [(ngModel)]="edit.firstName"
                 placeholder="First Name *"
               />
@@ -54,9 +55,8 @@
               <input
                 type="text"
                 class="form-control"
-                id="lastName"
+                id="lastName {{ id }}"
                 name="lastName"
-                value="{{ user?.data?.lastName }}"
                 [(ngModel)]="edit.lastName"
                 placeholder="Last Name *"
               />
@@ -67,7 +67,7 @@
               <input
                 type="text"
                 class="form-control"
-                id="email"
+                id="email {{ id}}"
                 name="email"
                 value="{{ user?.data?.email }}"
                 [(ngModel)]="edit.email"
@@ -78,7 +78,7 @@
               <input
                 type="text"
                 class="form-control"
-                id="phone"
+                id="phone {{ id }}"
                 name="phone"
                 value="{{ user?.data?.phone }}"
                 [(ngModel)]="edit.phone"
@@ -86,15 +86,20 @@
               />
             </div>
             <div class="mb-3 col">
-              <input
+              <!-- <input
                 type="text"
                 class="form-control"
                 id="roleId"
                 name="roleId"
-                value="{{ user?.data?.role?.roleId }}"
                 [(ngModel)]="edit.roleId"
                 placeholder="Select Role Type"
-              />
+              /> -->
+              <select class="form-control" id="roleId" name="roleId" [(ngModel)]="selectRole">
+                <option [ngValue]="1">Lorem Ipsum</option>
+              </select>
+              <!-- <select class="form-select mr-sm-2" id="roleId" name="roleId">
+                <option [ngValue]="1">Lorem Ipsum</option>
+              </select> -->
             </div>
           </div>
           <div class="row">
@@ -102,9 +107,8 @@
               <input
                 type="text"
                 class="form-control"
-                id="username"
+                id="username {{ id }}"
                 name="username"
-                value="{{ user?.data?.username }}"
                 [(ngModel)]="edit.username"
                 placeholder="Username *"
               />
@@ -113,7 +117,7 @@
               <input
                 type="text"
                 class="form-control"
-                id="password"
+                id="password {{ id }}"
                 name="password"
                 [(ngModel)]="edit.password"
                 placeholder="Password*"
@@ -123,7 +127,7 @@
               <input
                 type="text"
                 class="form-control"
-                id="ComfrimPassword"
+                id="ComfrimPassword {{ id }}"
                 name="ComfrimPassword"
                 placeholder="Comfrim Password*"
               />

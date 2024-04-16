@@ -1,3 +1,42 @@
-.container {
-    justify-content: center;
+
+
+.user-header {
+    color:#4A85F6;
+
+}
+
+
+/* Styling for the table */
+table {
+    border-collapse: collapse;
+    
+    width: 100%;
+}
+th, td {
+    /* padding: 8px; */
+    text-align: center;
+}
+th {
+    background: #EFF4FA;
+}
+
+/* .btn {
+    padding: 5px 10px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    cursor: pointer;
+} */
+
+.blue-border {
+    padding: 5px 5px;
+    border-radius: 10px;
+    background-color:#0095FF; /* White background */
+    color: #ffffff; /* Black text */
+    align-items: center;
+}
+
+
+.table-header {
+    background-color: #ffffff;
 }

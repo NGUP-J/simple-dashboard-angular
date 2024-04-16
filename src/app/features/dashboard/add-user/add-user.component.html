@@ -4,7 +4,7 @@
   data-bs-toggle="modal"
   data-bs-target="#exampleModal"
 >
-  Add user
+  Add user +
 </button>
 
 <div
@@ -83,14 +83,23 @@
               />
             </div>
             <div class="mb-3 col">
-              <input
+              <!-- <input
                 type="text"
                 class="form-control"
                 id="roleId"
                 name="roleId"
                 [(ngModel)]="model.roleId"
                 placeholder="Select Role Type"
-              />
+              /> -->
+
+              <select class="form-control" id="roleId" name="roleId" [(ngModel)]="selectRole">
+                <option [ngValue]="1">Lorem Ipsum</option>
+              </select>
+              
+              <!-- <select class="form-select mr-sm-2" id="AddinlineFormSelect" [(ngModel)]="selectRole">
+                <option hidden selected>Choose Role</option>
+                <option [ngValue]="1">Lorem Ipsum</option>
+              </select> -->
             </div>
           </div>
           <div class="row">

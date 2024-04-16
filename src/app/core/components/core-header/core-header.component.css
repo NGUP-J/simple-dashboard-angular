@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+/* Styling for the user details */
+.user-details {
+    display: flex;
+    align-items: center;
+}
+.user-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.user-role {
+    font-size: 14px;
+    color: #888;
+}
+/* Styling for icons */
+.icon {
+    margin-right: 5px;
+}
