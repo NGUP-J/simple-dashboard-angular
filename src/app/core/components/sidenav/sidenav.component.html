@@ -1,60 +1,55 @@
-<div class="sidebars d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">Your LOGO</span>
-    </a>
-    <br>
-    <ul class="nav nav-pills flex-column mb-auto" (click)="onGroupClick($event)">
-      <li class="nav-item">
-        <a [routerLink]="['/']" class="nav-link active" aria-current="page">
-          <i class="bi bi-command"></i>
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/']" class="nav-link link-dark">
-          <i class="bi bi-bar-chart-fill"></i>
-          User
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/document']" class="nav-link link-dark">
-          <i class="bi bi-file-earmark-text"></i>
-          Documents
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/']" class="nav-link link-dark">
-          <i class="bi bi-image"></i>
-          Photo
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/']" class="nav-link link-dark">
-          <i class="bi bi-diagram-3"></i>
-          Hierachy
-        </a>
-      </li>
-      <br>
-      <li>
-        <a [routerLink]="['/']" class="nav-link link-dark">
-          <i class="bi bi-chat-left-dots"></i>
-          Messages
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/']" class="nav-link link-dark">
-          <i class="bi bi-question-circle"></i>
-          Help
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/']" class="nav-link link-dark">
-          <i class="bi bi-gear"></i>
-          Setting
-        </a>
-      </li>
-    </ul>
-  </div>
-
-
+<div
+  class="sidebars d-flex flex-column flex-shrink-0 pt-3 bg-light"
+  style="width: 280px"
+>
+  <a
+    href="/"
+    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+  >
+    <span class="h2 ms-4 mt-4 fw-bold">Your LOGO</span>
+  </a>
+  <br />
+  <ul class="nav flex-column mb-auto" (click)="onGroupClick($event)">
+    <li class="nav-item">
+      <a [routerLink]="['/']" class="nav-link actived" aria-current="page">
+        <i class="bi bi-command"></i>&nbsp; Dashboard
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/']" class="nav-link link-dark">
+        <i class="bi bi-bar-chart-fill"></i>&nbsp; User
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/document']" class="nav-link link-dark">
+        <i class="bi bi-file-earmark-text"></i>&nbsp; Documents
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/']" class="nav-link link-dark">
+        <i class="bi bi-image"></i>&nbsp; Photo
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/']" class="nav-link link-dark">
+        <i class="bi bi-diagram-3"></i>&nbsp; Hierachy
+      </a>
+    </li>
+    <br />
+    <li>
+      <a [routerLink]="['/']" class="nav-link link-dark">
+        <i class="bi bi-chat-left-dots"></i>&nbsp; Messages
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/']" class="nav-link link-dark">
+        <i class="bi bi-question-circle"></i>&nbsp; Help
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/']" class="nav-link link-dark">
+        <i class="bi bi-gear"></i>&nbsp; Setting
+      </a>
+    </li>
+  </ul>
+</div>

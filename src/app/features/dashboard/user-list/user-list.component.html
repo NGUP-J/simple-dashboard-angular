@@ -1,9 +1,15 @@
-<div class="container">
-  <p class="user-header mt-3 h4 fw-bold">Users Dashboad</p>
+<div class="container-fluid">
+  <p class="user-header h4 fw-bold">Users Dashboad</p>
 
-  <div class="d-flex justify-content-between mt-3">
+  <div class="d-flex justify-content-between">
     <div class="d-flex">
-      <input type="text" class="form-control" style="width: 40vw" #queryText />
+      <input
+        type="text"
+        class="form-control"
+        style="width: 60vw; height: 45px"
+        placeholder="Search"
+        #queryText
+      />
       <button
         type="button"
         class="btn btn-primary ms-3"
@@ -21,22 +27,24 @@
           id="dropdownMenuButton1"
           data-bs-toggle="dropdown"
           aria-expanded="false"
+          style="height: 45px"
         >
-          Dropdown button
+          Sort by
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <a class="dropdown-item" (click)="sort('Name', 'asc')">ASC</a>
           <a class="dropdown-item" (click)="sort('Name', 'desc')">DESC</a>
         </div>
+        <i class="bi bi-sliders"></i>
       </div>
     </div>
   </div>
 
   <router-outlet *ngIf="users$ | async as users">
-    <table class="table mt-3">
+    <table class="table mt-3 bdr">
       <thead>
         <tr>
-          <th colspan="5" class="table-header text-start">List Users</th>
+          <th colspan="5" class="table-header text-start h5 p-3">List Users</th>
         </tr>
         <tr>
           <th colspan="2" class="text-start">Name</th>
@@ -55,15 +63,25 @@
               </p>
             </div>
           </td>
-          <td class="align-content-center text-center justify-content-center">
+          <td
+            class="align-content-center text-center justify-content-center"
+            style="width: 150px"
+          >
             <p class="blue-border">{{ user.permissions[0].permissionName }}</p>
           </td>
           <td>{{ user.createdDate }}</td>
           <td>{{ user.role.roleName }}</td>
-          <td >
-            <app-edit-user [id]="user.userId"></app-edit-user>
+          <td>
+            <app-edit-user
+              [id]="user.userId"
+              style="color: #8f9bb3"
+            ></app-edit-user>
             &nbsp;
-            <i class="bi bi-trash" (click)="onDelete(user.userId)"></i>
+            <i
+              class="bi bi-trash"
+              style="color: #8f9bb3"
+              (click)="onDelete(user.userId)"
+            ></i>
             <!-- <button class="btn btn-danger" (click)="onDelete(user.userId)">
               Delete
             </button> -->
@@ -71,7 +89,6 @@
         </tr>
       </tbody>
     </table>
-    
   </router-outlet>
   <div class="d-flex justify-content-center align-items-baseline">
     <p>Items per page:</p>
@@ -91,18 +108,27 @@
 
     <div class="mx-3">
       <span>
-        {{ ((pageNumber - 1) * pageSize) + 1 }} - 
-        {{ pageNumber * pageSize > totalCount ? totalCount : pageNumber * pageSize }} of {{ totalCount }}
+        {{ (pageNumber - 1) * pageSize + 1 }} -
+        {{
+          pageNumber * pageSize > totalCount
+            ? totalCount
+            : pageNumber * pageSize
+        }}
+        of {{ totalCount }}
       </span>
     </div>
     <div class="">
       <nav aria-label="Page navigation">
         <ul class="pagination">
           <li class="page-item">
-            <a class="page-link" (click)="getPrevPage()">Previous</a>
+            <a class="btn" (click)="getPrevPage()"
+              ><i class="bi bi-arrow-left"></i
+            ></a>
           </li>
           <li class="page-item">
-            <a class="page-link" (click)="getNextPage()">Next</a>
+            <a class="btn" (click)="getNextPage()"
+              ><i class="bi bi-arrow-right"></i
+            ></a>
           </li>
         </ul>
       </nav>

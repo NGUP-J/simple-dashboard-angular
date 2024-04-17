@@ -6,4 +6,16 @@
     background-color: #111;
     overflow-x: hidden;
     padding-top: 20px;
+    padding: 0;
+}
+
+.actived {
+    color: #4A85F6;
+    border-right: 4px solid #4A85F6;
+}   
+
+li {
+    margin: 10px 0;
+    margin-left: 10px;
+    font-size: 20px;
 }

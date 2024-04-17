@@ -18,6 +18,8 @@ export class UserListComponent implements OnInit, OnDestroy {
   list: number[] = [];
   pageNumber = 1;
   pageSize = 5;
+  orderDircetion = 'asc';
+  orderby = 'Name';
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
@@ -73,15 +75,14 @@ export class UserListComponent implements OnInit, OnDestroy {
         );
       },
     });
-
-
   }
 
   sort(orderBy: string, orderDirection: string): void {
+    this.orderDircetion = orderDirection;
     this.users$ = this.userService.getAllUsers(
       undefined,
-      orderBy,
-      orderDirection,
+      this.orderby,
+      this.orderDircetion,
       this.pageNumber,
       this.pageSize
     );

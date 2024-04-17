@@ -6,8 +6,11 @@
 >
   Edit
 </button> -->
-<i class="bi bi-pencil" data-bs-toggle="modal"
-[attr.data-bs-target]="'#editModal' + id"></i>
+<i
+  class="bi bi-pencil"
+  data-bs-toggle="modal"
+  [attr.data-bs-target]="'#editModal' + id"
+></i>
 
 <div
   class="modal fade"
@@ -19,7 +22,7 @@
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editModalLabel{{ id}}">Edit User</h1>
+        <h1 class="modal-title fs-5" id="editModalLabel{{ id }}">Edit User</h1>
         <button
           type="button"
           class="btn-close"
@@ -34,7 +37,7 @@
               type="text"
               disabled
               class="form-control"
-              id="Id{{ id}}"
+              id="Id{{ id }}"
               name="Id"
               value="{{ user?.data?.id }}"
               placeholder="USER ID *"
@@ -67,7 +70,7 @@
               <input
                 type="text"
                 class="form-control"
-                id="email {{ id}}"
+                id="email {{ id }}"
                 name="email"
                 value="{{ user?.data?.email }}"
                 [(ngModel)]="edit.email"
@@ -94,7 +97,12 @@
                 [(ngModel)]="edit.roleId"
                 placeholder="Select Role Type"
               /> -->
-              <select class="form-control" id="roleId" name="roleId" [(ngModel)]="selectRole">
+              <select
+                class="form-control"
+                id="roleId"
+                name="roleId"
+                [(ngModel)]="selectRole"
+              >
                 <option [ngValue]="1">Lorem Ipsum</option>
               </select>
               <!-- <select class="form-select mr-sm-2" id="roleId" name="roleId">
@@ -134,8 +142,8 @@
             </div>
           </div>
         </div>
-        <table class="table">
-          <thead class="thead-light">
+        <table class="table text-start">
+          <thead class="table-secondary">
             <tr>
               <th>Module Permission</th>
               <th>Read</th>
@@ -145,7 +153,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let permission of edit.permissions; let i = index">
-              <td>{{ permission.permissionId }}</td>
+              <!-- <td>{{ permission.permissionId }}</td> -->
+
+              <td>{{ permissionlist[+permission.permissionId] }}</td>
               <td>
                 <input
                   type="checkbox"
@@ -181,12 +191,13 @@
         </table>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
-            Add user
+            Edit user
           </button>
           <button
             type="button"
-            class="btn btn-secondary"
+            class="btn"
             data-bs-dismiss="modal"
+            style="color: #8f9bb3"
           >
             Cancel
           </button>

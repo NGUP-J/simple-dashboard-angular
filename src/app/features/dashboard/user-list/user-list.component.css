@@ -1,15 +1,21 @@
-
+.container-fluid {
+    padding: 10px 30px;
+}
 
 .user-header {
     color:#4A85F6;
 
 }
 
+.bdr {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
 
 /* Styling for the table */
 table {
     border-collapse: collapse;
-    
     width: 100%;
 }
 th, td {
@@ -17,6 +23,7 @@ th, td {
     text-align: center;
 }
 th {
+    /* border: 1px solid #ccc; */
     background: #EFF4FA;
 }
 

@@ -3,6 +3,7 @@
   class="btn btn-primary"
   data-bs-toggle="modal"
   data-bs-target="#exampleModal"
+  style="height: 45px"
 >
   Add user +
 </button>
@@ -92,10 +93,15 @@
                 placeholder="Select Role Type"
               /> -->
 
-              <select class="form-control" id="roleId" name="roleId" [(ngModel)]="selectRole">
+              <select
+                class="form-control"
+                id="roleId"
+                name="roleId"
+                [(ngModel)]="selectRole"
+              >
                 <option [ngValue]="1">Lorem Ipsum</option>
               </select>
-              
+
               <!-- <select class="form-select mr-sm-2" id="AddinlineFormSelect" [(ngModel)]="selectRole">
                 <option hidden selected>Choose Role</option>
                 <option [ngValue]="1">Lorem Ipsum</option>
@@ -135,7 +141,7 @@
           </div>
         </div>
         <table class="table">
-          <thead class="thead-light">
+          <thead class="table-secondary">
             <tr>
               <th>Module Permission</th>
               <th>Read</th>
@@ -145,7 +151,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let permission of model.permissions; let i = index">
-              <td>{{ permission.permissionId }}</td>
+              <!-- <td>{{ permission.permissionId }}</td> -->
+              <td>{{ permissionlist[+permission.permissionId] }}</td>
               <td>
                 <input
                   type="checkbox"
@@ -185,8 +192,9 @@
           </button>
           <button
             type="button"
-            class="btn btn-secondary"
+            class="btn"
             data-bs-dismiss="modal"
+            style="color: #8f9bb3"
           >
             Cancel
           </button>

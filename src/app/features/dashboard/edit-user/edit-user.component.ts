@@ -17,6 +17,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
   editUserSubscription?: Subscription;
   paramsSubscription?: Subscription;
   selectRole?: string;
+  permissionlist = ['', 'Super Admin', 'Admin', 'Employee'];
 
   @Input()
   id: string | null = null;
@@ -76,26 +77,35 @@ export class EditUserComponent implements OnInit, OnDestroy {
               username: this.user.data.username,
               password: '',
               permissions: [
-                {
-                  permissionId: '1',
-                  isReadable: false,
-                  isWritable: false,
-                  isDeletable: false,
-                },
-                {
-                  permissionId: '2',
-                  isReadable: false,
-                  isWritable: false,
-                  isDeletable: false,
-                },
-                {
-                  permissionId: '3',
-                  isReadable: false,
-                  isWritable: false,
-                  isDeletable: false,
-                },
+                // {
+                //   permissionId: '1',
+                //   isReadable: false,
+                //   isWritable: false,
+                //   isDeletable: false,
+                // },
+                // {
+                //   permissionId: '2',
+                //   isReadable: false,
+                //   isWritable: false,
+                //   isDeletable: false,
+                // },
+                // {
+                //   permissionId: '3',
+                //   isReadable: false,
+                //   isWritable: false,
+                //   isDeletable: false,
+                // },
               ],
             };
+
+            for (const permission of this.user.data.permissions) {
+              this.edit.permissions.push({
+                permissionId: permission.permissionId,
+                isReadable: permission.isReadable,
+                isWritable: permission.isWritable,
+                isDeletable: permission.isDeletable,
+              });
+            }
           },
         });
     }
@@ -114,14 +124,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
       password: this.edit.password,
       permissions: this.edit.permissions,
     };
-    // this.userService.editUser(this.edit)
-    // .subscribe({
-    //   next: (response) => {
-    //     console.log('User edited successfully')
-    //     this.router.navigate(['/dashboard']);
-    //   }
-    // });
-    // this.resetForm();
     if (this.id) {
       this.editUserSubscription = this.userService
         .editUser(this.id, EditUserRequest)

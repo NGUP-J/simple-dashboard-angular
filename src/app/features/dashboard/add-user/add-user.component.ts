@@ -18,6 +18,7 @@ export class AddUserComponent implements OnDestroy {
   users$?: Observable<AllUser>;
   selectRole?: string;
   availableOptions: [{ id: '1'; name: 'Lorem Ipsum' }] | undefined;
+  permissionlist = ['', 'Super Admin', 'Admin', 'Employee'];
 
   constructor(private userService: UserService, private router: Router) {
     this.model = {

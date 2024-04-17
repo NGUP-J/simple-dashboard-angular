@@ -1,10 +1,17 @@
-.container {
+.container-fluid{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 20px 30px;
 }
 /* Styling for the user details */
+.welcome-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .user-details {
     display: flex;
     align-items: center;
