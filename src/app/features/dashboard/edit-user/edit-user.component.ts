@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { EditUserRequest } from '../models/edit-user-request.model';
 import { User } from '../models/user.model';
+import { UserListComponent } from '../user-list/user-list.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -16,7 +17,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   editUserSubscription?: Subscription;
   paramsSubscription?: Subscription;
-  selectRole?: string;
+  roleOptions = [
+    { value: '1', label: 'Lorem Ipsum' },
+  ];
   permissionlist = ['', 'Super Admin', 'Admin', 'Employee'];
 
   @Input()
@@ -25,7 +28,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private userlist : UserListComponent
   ) {
     this.edit = {
       firstName: '',
@@ -77,24 +81,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
               username: this.user.data.username,
               password: '',
               permissions: [
-                // {
-                //   permissionId: '1',
-                //   isReadable: false,
-                //   isWritable: false,
-                //   isDeletable: false,
-                // },
-                // {
-                //   permissionId: '2',
-                //   isReadable: false,
-                //   isWritable: false,
-                //   isDeletable: false,
-                // },
-                // {
-                //   permissionId: '3',
-                //   isReadable: false,
-                //   isWritable: false,
-                //   isDeletable: false,
-                // },
               ],
             };
 
@@ -112,8 +98,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   onFormSubmit(): void {
-    this.edit.email = this.selectRole?.toString() || '1'.toString();
-    console.log(this.edit);
+    // this.edit.roleId = this.selectRole?.toString() || '1'.toString();
+    // console.log(this.edit);
     const EditUserRequest: EditUserRequest = {
       firstName: this.edit.firstName,
       lastName: this.edit.lastName,
@@ -130,7 +116,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (response) => {
             console.log('User edited successfully');
-            this.router.navigate(['/dashboard']);
+            //this.router.navigate(['/']);
+            this.userlist.GetAll(this.userlist.search, this.userlist.orderby, this.userlist.orderDircetion, this.userlist.pageNumber, this.userlist.pageSize);
           },
         });
     }

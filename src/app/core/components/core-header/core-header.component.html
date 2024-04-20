@@ -1,18 +1,27 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="user != undefined">
   <div class="welcome-form">
-    <h3 style="margin-bottom: 0">Hello, Lekan</h3>
-    <p style="color: #757575">Have a nice day</p>
+    <h3 class="mb-0 fs-20">Hello, {{ user.email }}</h3>
+    <p class="header-descp">Have a nice day</p>
   </div>
   <div class="user-details">
-    <i class="icon bi bi-bell-fill h4"></i>
-    <i
-      class="icon bi bi-circle-fill h1"
-      style="border-left: 2px solid #bfbfbf; padding-left: 10px; color: #bfbfbf"
-    ></i>
+    <i class="icon bi bi-bell-fill"></i>
+    <i class="icon bi bi-circle-fill"></i>
     <div class="d-flex flex-column">
-      <div class="user-name">Lekan Okeowo</div>
-      <div class="user-role">Admin</div>
+      <div class="user-name">{{ user.email }}</div>
+      <div class="user-role">{{ user.roles }}</div>
     </div>
-    <i class="icon bi bi-chevron-down"></i>
+    <div class="dropdown">
+      <a
+        class="btn dropdown-toggle"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <!-- <i class="icon bi bi-chevron-down"></i> -->
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>
+      </ul>
+    </div>
   </div>
 </div>

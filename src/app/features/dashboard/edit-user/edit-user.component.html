@@ -97,17 +97,46 @@
                 [(ngModel)]="edit.roleId"
                 placeholder="Select Role Type"
               /> -->
+              <!-- <select
+                class="form-control"
+                id="roleId"
+                name="roleId"
+                [(ngModel)]="edit.roleId"
+                
+              >
+                
+                <option [ngValue]="1" [selected]="edit.roleId === '1'">Lorem Ipsum 1</option>
+              </select> -->
+              <!-- <select
+                class="form-control"
+                id="roleId"
+                name="roleId"
+                [(ngModel)]="edit.roleId"
+              >
+                <option [ngValue]="1" [selected]="edit.roleId === '1'">
+                  Lorem Ipsum 1
+                </option>
+                <option [ngValue]="2" [selected]="edit.roleId === '1'">
+                  Lorem Ipsum 2
+                </option>
+                <option [ngValue]="3" [selected]="edit.roleId === '1'">
+                  Lorem Ipsum 3
+                </option>
+              </select> -->
               <select
                 class="form-control"
                 id="roleId"
                 name="roleId"
-                [(ngModel)]="selectRole"
+                [(ngModel)]="edit.roleId"
               >
-                <option [ngValue]="1">Lorem Ipsum</option>
+                <option
+                  *ngFor="let option of roleOptions"
+                  [ngValue]="option.value"
+                  [selected]="edit.roleId === option.value"
+                >
+                  {{ option.label }}
+                </option>
               </select>
-              <!-- <select class="form-select mr-sm-2" id="roleId" name="roleId">
-                <option [ngValue]="1">Lorem Ipsum</option>
-              </select> -->
             </div>
           </div>
           <div class="row">

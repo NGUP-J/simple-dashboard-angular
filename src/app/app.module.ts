@@ -11,6 +11,7 @@ import { UserListComponent } from './features/dashboard/user-list/user-list.comp
 import { AddUserComponent } from './features/dashboard/add-user/add-user.component';
 import { FormsModule } from '@angular/forms';
 import {
+  HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
   withFetch,
@@ -18,6 +19,8 @@ import {
 import { EditUserComponent } from './features/dashboard/edit-user/edit-user.component';
 import { CoreHeaderComponent } from './core/components/core-header/core-header.component';
 import { DocumentListComponent } from './features/document/document-list/document-list.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,9 +31,17 @@ import { DocumentListComponent } from './features/document/document-list/documen
     EditUserComponent,
     CoreHeaderComponent,
     DocumentListComponent,
+    LoginComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [provideClientHydration(), provideHttpClient(withFetch())],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: authInterceptor,
+      multi: true
+    },
+    provideHttpClient(withFetch()),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

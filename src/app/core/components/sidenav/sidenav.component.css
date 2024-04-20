@@ -1,9 +1,9 @@
 .sidebars {
     height: 100%;
-    width: 250px;
+    width: 254px;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #fff;
     overflow-x: hidden;
     padding-top: 20px;
     padding: 0;
@@ -12,10 +12,28 @@
 .actived {
     color: #4A85F6;
     border-right: 4px solid #4A85F6;
+    font-weight: 600;
 }   
 
 li {
     margin: 10px 0;
     margin-left: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #757575;
+}
+
+/* .nav-link {
+    color: #757575;
+    font-size: 16px;
+    font-weight: 400;
+} */
+
+.bi {
+    font-size: 20px;
+
+}
+
+.fs-20 {
     font-size: 20px;
 }

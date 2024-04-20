@@ -21,23 +21,103 @@
 /* Custom styles for document list header */
 .document-header {
     margin-bottom: 20px;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
 }
+
+
+
 
 /* Custom styles for document items */
 .document-item {
     border-bottom: 1px solid #e0e0e0;
     padding: 10px 0;
+    p {
+        font-size: 12px;
+        font-weight: 400;
+        color: #6c757d;
+    }
 }
 
 /* Custom styles for document item title */
-
-/* Custom styles for document title */
-.document-title {
-    font-weight: bold;
+.document-list {
+    font-size: 13px;
+    font-weight: 400px;
 }
 
 /* Custom styles for document date */
 .document-date {
     color: #6c757d;
+    font-size: 12px;
+    font-weight: 400px;
+}
+
+.btn-border {
+    border: 1px solid #DDDFE1;
+    color: #4A85F6;
+    padding: 5px 10px;
+    border-radius: 1px;
+    cursor: pointer;
+    width: 53px;
+    height: 53px;
+    i {
+        font-size: 21px;
+    }
+}
+
+.btn-filter {
+    border: 1px solid #DDDFE1;
+    border-radius: 1px;
+    width: 227px;
+    height: 52px;
+    font-size: 15px;
+    font-weight: 400;
+
+}
+
+.btn-plus {
+    width: 53px;
+    height: 53px;
+    background-color: #4A85F6;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.document-header {
+    margin: 0;
+    h5 {
+        font-size: 16px;
+        font-weight: 600;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 2.5px;
+    }
+    p {
+        font-size: 12px;
+        font-weight: 400;
+        color:#464E5F;
+    }
+}
+
+.bi-file-earmark-text {
+    font-size: 24px;
+    background:#ECF0F3;
+    width: 41px;
+    height: 41px;
+    border-radius: 5px;
+    padding-left: 9px;
+    padding-right: 9px;
+    color: #4A85F6;
+}
+
+.d-item-icon {
+    font-size: 18px;
+    color:#4A85F6;
+    div {
+        width: 36px;
+        height: 36px;
+        border: 1px solid #DDDFE1;
+        border-radius: 5px;
+        text-align: center;
+    };
 }

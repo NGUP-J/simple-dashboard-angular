@@ -12,12 +12,14 @@ import { Router } from '@angular/router';
 export class UserListComponent implements OnInit, OnDestroy {
   users$?: Observable<AllUser>;
 
-  countUserSubscription?: Subscription;
+  private countUserSubscription: Subscription | undefined;
+  private refreshRequiredSubscription: Subscription | undefined;
 
   totalCount = 0;
   list: number[] = [];
   pageNumber = 1;
   pageSize = 5;
+  search = '';
   orderDircetion = 'asc';
   orderby = 'Name';
   constructor(private userService: UserService, private router: Router) {}
@@ -37,7 +39,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       },
     });
 
-    this.userService.Refreshrequired.subscribe(() => {
+    this.refreshRequiredSubscription = this.userService.Refreshrequired.subscribe(() => {
       this.userService.getUserCount().subscribe({
         next: (value) => {
           this.totalCount = value;
@@ -56,18 +58,25 @@ export class UserListComponent implements OnInit, OnDestroy {
   onDelete(id: string): void {
     this.userService.deleteUser(id).subscribe({
       next: (response) => {
-        this.router.navigate(['/dashboard']);
+        this.GetAll(
+          undefined,
+          undefined,
+          undefined,
+          this.pageNumber,
+          this.pageSize
+        );
       },
     });
   }
 
   onSearch(search?: string): void {
+    this.search = search || '';
     this.countUserSubscription = this.userService.getUserCount().subscribe({
       next: (value) => {
         this.totalCount = value;
         this.list = new Array(Math.ceil(value / this.pageSize));
         this.GetAll(
-          search,
+          this.search,
           undefined,
           undefined,
           this.pageNumber,
@@ -80,7 +89,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   sort(orderBy: string, orderDirection: string): void {
     this.orderDircetion = orderDirection;
     this.users$ = this.userService.getAllUsers(
-      undefined,
+      this.search,
       this.orderby,
       this.orderDircetion,
       this.pageNumber,
@@ -91,9 +100,9 @@ export class UserListComponent implements OnInit, OnDestroy {
   getPage(pageNumber: number): void {
     this.pageNumber = pageNumber;
     this.GetAll(
-      undefined,
-      undefined,
-      undefined,
+      this.search,
+      this.orderby,
+      this.orderDircetion,
       this.pageNumber,
       this.pageSize
     );
@@ -104,9 +113,9 @@ export class UserListComponent implements OnInit, OnDestroy {
 
     this.pageNumber -= 1;
     this.GetAll(
-      undefined,
-      undefined,
-      undefined,
+      this.search,
+      this.orderby,
+      this.orderDircetion,
       this.pageNumber,
       this.pageSize
     );
@@ -117,16 +126,17 @@ export class UserListComponent implements OnInit, OnDestroy {
 
     this.pageNumber += 1;
     this.GetAll(
-      undefined,
-      undefined,
-      undefined,
+      this.search,
+      this.orderby,
+      this.orderDircetion,
       this.pageNumber,
       this.pageSize
     );
   }
 
   ngOnDestroy(): void {
-    this.userService.Refreshrequired.unsubscribe();
+    this.countUserSubscription?.unsubscribe();
+    this.refreshRequiredSubscription?.unsubscribe();
   }
 
   onPageSizeChange(): void {
@@ -137,9 +147,9 @@ export class UserListComponent implements OnInit, OnDestroy {
         this.totalCount = value;
         this.list = new Array(Math.ceil(value / this.pageSize));
         this.GetAll(
-          undefined,
-          undefined,
-          undefined,
+          this.search,
+          this.orderby,
+          this.orderDircetion,
           this.pageNumber,
           this.pageSize
         );

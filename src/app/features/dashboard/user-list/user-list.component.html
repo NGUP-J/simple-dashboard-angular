@@ -1,22 +1,22 @@
 <div class="container-fluid">
-  <p class="user-header h4 fw-bold">Users Dashboad</p>
+  <p class="user-header fw-bold">Users Dashboad</p>
 
   <div class="d-flex justify-content-between">
     <div class="d-flex">
       <input
         type="text"
-        class="form-control"
-        style="width: 60vw; height: 45px"
+        class="text-search"
         placeholder="Search"
         #queryText
+        (change)="onSearch(queryText.value)"
       />
-      <button
+      <!-- <button
         type="button"
         class="btn btn-primary ms-3"
         (click)="onSearch(queryText.value)"
       >
         Search
-      </button>
+      </button> -->
     </div>
     <div class="d-flex">
       <app-add-user></app-add-user>
@@ -35,6 +35,22 @@
           <a class="dropdown-item" (click)="sort('Name', 'asc')">ASC</a>
           <a class="dropdown-item" (click)="sort('Name', 'desc')">DESC</a>
         </div>
+      </div>
+      <div class="dropdown">
+        <button
+          class="btn dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          style="height: 45px"
+        >
+          Saved search
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <!-- <a class="dropdown-item" (click)="sort('Name', 'asc')">ASC</a>
+          <a class="dropdown-item" (click)="sort('Name', 'desc')">DESC</a> -->
+        </div>
         <i class="bi bi-sliders"></i>
       </div>
     </div>
@@ -46,8 +62,8 @@
         <tr>
           <th colspan="5" class="table-header text-start h5 p-3">List Users</th>
         </tr>
-        <tr>
-          <th colspan="2" class="text-start">Name</th>
+        <tr class="table-category">
+          <th colspan="2" class="text-start ps-4">Name</th>
           <th>Create Date</th>
           <th>Role</th>
           <th>Action</th>
@@ -55,23 +71,29 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of users.dataSource" class="">
-          <td class="d-flex justify-content-between text-start">
-            <div>
-              <p>{{ user.firstName }} {{ user.lastName }}</p>
-              <p style="font-size: smaller; color: #8f9bb3">
+          <td class="table-name">
+            <div class="d-flex flex-column m-0 p-0 text-start">
+              <p class="table-username p-0 m-0">
+                {{ user.firstName }} {{ user.lastName }}
+              </p>
+              <p class="table-email p-0 m-0">
                 {{ user.email }}
               </p>
             </div>
           </td>
           <td
-            class="align-content-center text-center justify-content-center"
-            style="width: 150px"
+            class="table-permission align-content-center text-center justify-content-center"
           >
             <p class="blue-border">{{ user.permissions[0].permissionName }}</p>
           </td>
-          <td>{{ user.createdDate }}</td>
-          <td>{{ user.role.roleName }}</td>
-          <td>
+          <td class="table-date align-content-center justify-content-center">
+            <p class="m-auto align-items-center">{{ user.createdDate }}</p>
+          </td>
+          <td class="table-date align-content-center justify-content-center">
+            {{ user.role.roleName }}
+          </td>
+          <td class="align-content-center justify-content-center">
+            <!--  -->
             <app-edit-user
               [id]="user.userId"
               style="color: #8f9bb3"
@@ -80,11 +102,48 @@
             <i
               class="bi bi-trash"
               style="color: #8f9bb3"
-              (click)="onDelete(user.userId)"
+              data-bs-toggle="modal"
+              data-bs-target="#DeleteModal"
+              
             ></i>
-            <!-- <button class="btn btn-danger" (click)="onDelete(user.userId)">
-              Delete
-            </button> -->
+            <!-- Button trigger modal -->
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="DeleteModal"
+              tabindex="-1"
+              aria-labelledby="DeleteModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="DeleteModalLabel">
+                      Delete User
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body text-start">Do you want to delete user?</div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDelete(user.userId)">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </td>
         </tr>
       </tbody>

@@ -6,6 +6,7 @@ import { response } from 'express';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AllUser } from '../models/all-user.model';
+import { UserListComponent } from '../user-list/user-list.component';
 
 @Component({
   selector: 'app-add-user',
@@ -16,11 +17,17 @@ export class AddUserComponent implements OnDestroy {
   model: AddUserRequest;
   private addUserSubscription?: Subscription;
   users$?: Observable<AllUser>;
-  selectRole?: string;
+  roleOptions = [
+    { value: '1', label: 'Lorem Ipsum' },
+  ];
   availableOptions: [{ id: '1'; name: 'Lorem Ipsum' }] | undefined;
   permissionlist = ['', 'Super Admin', 'Admin', 'Employee'];
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private userlist: UserListComponent
+  ) {
     this.model = {
       Id: Guid.create().toString(),
       firstName: '',
@@ -58,12 +65,12 @@ export class AddUserComponent implements OnDestroy {
   }
 
   onFormSubmit() {
-    this.model.roleId = this.selectRole?.toString() || '1'.toString();
     console.log(this.model);
     this.addUserSubscription = this.userService.addUser(this.model).subscribe({
       next: (response) => {
         console.log('User added successfully');
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
+        this.userlist.GetAll(this.userlist.search, this.userlist.orderby, this.userlist.orderDircetion, this.userlist.pageNumber, this.userlist.pageSize);
       },
     });
     this.resetForm();

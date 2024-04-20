@@ -1,35 +1,53 @@
 import { Injectable } from '@angular/core';
 import { AddUserRequest } from '../models/add-user-request.model';
-import { HttpClient, HttpEvent, HttpHandler, HttpParams, HttpRequest } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpHandler,
+  HttpParams,
+  HttpRequest,
+} from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
 import { AllUser } from '../models/all-user.model';
 import { environment } from '../../../../environments/environment';
 import { User } from '../models/user.model';
 import { EditUserRequest } from '../models/edit-user-request.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  private _refreshrequired=new Subject<void>();
+  private _refreshrequired = new Subject<void>();
 
-  get Refreshrequired(){
+  get Refreshrequired() {
     return this._refreshrequired;
   }
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const newRequest = request.clone({ headers: request.headers.append('ngsw-bypass', 'true') });
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const newRequest = request.clone({
+      headers: request.headers.append('ngsw-bypass', 'true'),
+    });
     return next.handle(newRequest);
   }
 
   addUser(model: AddUserRequest): Observable<void> {
-    return this.http.post<void>(`${environment.apiBaseUrl}/User`, model).pipe(
-      tap(() => this.Refreshrequired.next())
-    )
+    return this.http
+      .post<void>(`${environment.apiBaseUrl}/User?addAuth=true`, model)
+      .pipe(tap(() => this.Refreshrequired.next()));
   }
 
-  getAllUsers(search?: string, orderBy?: string, orderDirection?: string, pageNumber?: number, pageSize?: number): Observable<AllUser> {
+  getAllUsers(
+    search?: string,
+    orderBy?: string,
+    orderDirection?: string,
+    pageNumber?: number,
+    pageSize?: number
+  ): Observable<AllUser> {
     let params = new HttpParams();
 
     if (search) {
@@ -53,28 +71,27 @@ export class UserService {
     }
 
     return this.http.get<AllUser>(`${environment.apiBaseUrl}/User`, {
-      params: params
+      params: params,
     });
   }
 
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${environment.apiBaseUrl}/User/${id}`);
   }
-  
-  editUser(id: string,EditUser: EditUserRequest): Observable<User> {
-    return this.http.put<User>(`${environment.apiBaseUrl}/User/${id}`, EditUser).pipe(
-      tap(() => this.Refreshrequired.next())
-    )
+
+  editUser(id: string, EditUser: EditUserRequest): Observable<User> {
+    return this.http
+      .put<User>(`${environment.apiBaseUrl}/User/${id}?addAuth=true`, EditUser)
+      .pipe(tap(() => this.Refreshrequired.next()));
   }
 
   deleteUser(id: string): Observable<User> {
-    return this.http.delete<User>(`${environment.apiBaseUrl}/User/${id}`).pipe(
-      tap(() => this.Refreshrequired.next())
-    )
+    return this.http
+      .delete<User>(`${environment.apiBaseUrl}/User/${id}?addAuth=true`)
+      .pipe(tap(() => this.Refreshrequired.next()));
   }
 
   getUserCount(): Observable<number> {
     return this.http.get<number>(`${environment.apiBaseUrl}/User/Count`);
   }
-
 }

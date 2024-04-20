@@ -1,14 +1,26 @@
 .container-fluid {
-    padding: 10px 30px;
+    padding: 0 30px;
 }
 
 .user-header {
     color:#4A85F6;
+    font-size: 24px;
+    font-weight: 700;
 
 }
 
+.text-search {
+    border-radius: 16px;
+    border: 0;
+    width: 1240px;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 12px;
+}
+
 .bdr {
-    border-radius: 10px;
+    border-radius: 16px;
     overflow: hidden;
   }
 
@@ -25,6 +37,9 @@ th, td {
 th {
     /* border: 1px solid #ccc; */
     background: #EFF4FA;
+    font-size:15px;
+    font-weight: 600;
+    color:#8F9BB3;
 }
 
 /* .btn {
@@ -35,15 +50,54 @@ th {
     cursor: pointer;
 } */
 
+.table-header {
+    background-color: #ffffff;
+    font-size: 17px;
+    color:#222B45;
+}
+
+/* .table-category ,th {
+    
+} */
+
+.table-name {
+    height: 65px;
+    width: 500px;
+    padding: 15px 38px;
+}
+
+.table-username {
+    font-size:13px;
+    font-weight: 600;
+    color:#222B45;
+}
+
+.table-email {
+    font-size:12px;
+    font-weight: 400;
+    color:#8F9BB3;
+}
+
+.table-permission {
+    font-size: 13px;
+    font-weight: 600;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
 .blue-border {
+    margin: auto;
     padding: 5px 5px;
     border-radius: 10px;
     background-color:#0095FF; /* White background */
     color: #ffffff; /* Black text */
     align-items: center;
+    width: 100px;
+    height: 30px;
 }
 
-
-.table-header {
-    background-color: #ffffff;
+.table-date {
+    font-size: 12px;
+    font-weight: 400;
 }

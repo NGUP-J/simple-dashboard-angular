@@ -17,15 +17,43 @@
     align-items: center;
 }
 .user-name {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 600;
     margin-right: 10px;
+    color:#0A0A0A;
 }
 .user-role {
-    font-size: 14px;
-    color: #888;
+    font-size: 12px;
+    font-weight: 400;
+    color:#0A0A0A;
 }
 /* Styling for icons */
 .icon {
     margin-right: 5px;
+}
+
+.fs-20 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.header-descp {
+    font-size: 14px;
+    font-weight: 400;
+    color:#757575;
+}
+
+.bi-bell-fill {
+    font-size: 24px;
+    padding-right: 25px;
+    padding-bottom: 10px;
+}
+
+.bi-circle-fill {
+    font-size: 45px;
+    border-left: 2px solid #bfbfbf;
+    padding-left: 25px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    color: #bfbfbf;
 }
