@@ -1,4 +1,10 @@
 # MyDashboard
+![Screenshot 2024-04-22 091735](https://github.com/NGUP-J/simple-dashboard-angular/assets/79709374/98b9cbab-f825-47ba-94b3-aa560fca91a6)
+![Screenshot 2024-04-22 091743](https://github.com/NGUP-J/simple-dashboard-angular/assets/79709374/ce435c6d-7c01-4519-bd94-6a05aff49b32)
+![Screenshot 2024-04-22 091751](https://github.com/NGUP-J/simple-dashboard-angular/assets/79709374/404f480c-b87a-481c-968e-dd4fb9b873a4)
+![Screenshot 2024-04-22 091801](https://github.com/NGUP-J/simple-dashboard-angular/assets/79709374/07622728-b484-42e6-9a42-e6eabf6be1d4)
+![Screenshot 2024-04-22 091807](https://github.com/NGUP-J/simple-dashboard-angular/assets/79709374/d1efea6b-7368-45fb-82df-8d61c935be16)
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
 
